@@ -1,4 +1,23 @@
 *{
     background-color: #17223B;
     color: #FF6768;
+    text-align: center;
+    border: 1px solid red;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.centerItems{
+    justify-content: center;
+    align-items: center;
+}
+
+.continer{
+    height: 750px;
+    width: 500px;
+    
 }
