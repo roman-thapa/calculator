@@ -17,7 +17,7 @@ body{
 }
 
 .continer{
-    height: 26.5rem;
+    height: 31.25rem;
     width: 20rem;
     padding: 10px;
     background-color: #6B778D;
@@ -46,6 +46,19 @@ body{
     background: #263859;
     border: 0px solid transparent;
     border-radius: 100%;
+    box-shadow: 4px 5px 5px 0px rgb(0 0 0 / 50%);
+    color: #FF6768;
+    padding: 1rem;
+    margin: .25rem;
+    flex-grow: 1;
+}
+
+.powerButton{
+    font-size: 2rem;
+    font-weight: 700;
+    background: #263859;
+    border: 0px solid transparent;
+    /* border-radius: 50%; */
     box-shadow: 4px 5px 5px 0px rgb(0 0 0 / 50%);
     color: #FF6768;
     padding: 1rem;

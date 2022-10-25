@@ -1,73 +1,94 @@
 let firstNumber = '';
-let secondNumber = 2;
+let secondNumber = '';
 
 let entry = document.querySelector('.secondDisplay');
 let result = document.querySelector('.mainDisplay');
+let power = document.querySelector('.powerButton')
 
+
+power.addEventListener('click', ()=>{
+    getEntry(firstNumber);
+    power.style.color = "green";
+})
+
+
+
+function getEntry(number){
 
 let one = document.querySelector('.num1');
 one.addEventListener('click', () => {
-    firstNumber += '1';
-    entry.innerText = firstNumber;
+    number += '1';
+    entry.innerText = number;
 }); 
 
 let two = document.querySelector('.num2');
 two.addEventListener('click', () => {
-    firstNumber += '2';
-    entry.innerText = firstNumber;
+    number += '2';
+    entry.innerText = number;
 }); 
 
 let three = document.querySelector('.num3');
 three.addEventListener('click', () => {
-    firstNumber += '3';
-    entry.innerText = firstNumber;
+    number += '3';
+    entry.innerText = number;
 }); 
 
 let four = document.querySelector('.num4');
 four.addEventListener('click', () => {
-    firstNumber += '4';
-    entry.innerText = firstNumber;
+    number += '4';
+    entry.innerText = number;
 }); 
 
 let five = document.querySelector('.num5');
 five.addEventListener('click', () => {
-    firstNumber += '5';
-    entry.innerText = firstNumber;
+    number += '5';
+    entry.innerText = number;
 }); 
 
 let six = document.querySelector('.num6');
 six.addEventListener('click', () => {
-    firstNumber += '6';
-    entry.innerText = firstNumber;
+    number += '6';
+    entry.innerText = number;
 }); 
 
 let seven = document.querySelector('.num7');
 seven.addEventListener('click', () => {
-    firstNumber += '7';
-    entry.innerText = firstNumber;
+    number += '7';
+    entry.innerText = number;
 }); 
 
 let eight = document.querySelector('.num8');
 eight.addEventListener('click', () => {
-    firstNumber += '8';
-    entry.innerText = firstNumber;
+    number += '8';
+    entry.innerText = number;
 }); 
 
 let nine = document.querySelector('.num9');
 nine.addEventListener('click', () => {
-    firstNumber += '9';
-    entry.innerText = firstNumber;
+    number += '9';
+    entry.innerText = number;
 }); 
 
 let zero = document.querySelector('.num0');
 zero.addEventListener('click', () => {
-    firstNumber += '0';
-    entry.innerText = firstNumber;
+    number += '0';
+    entry.innerText = number;
 }); 
 
 let point = document.querySelector('.point');
 point.addEventListener('click', () => {
-    firstNumber += ".";
-    entry.innerText = firstNumber;
+    number += ".";
+    entry.innerText = number;
 }); 
 
+let allClear = document.querySelector('.allClearButton');
+allClear.addEventListener('click', ()=>{
+    firstNumber = '';
+    secondNumber = '';
+    number = '';
+    entry.innerText = '0';
+    result.innerText = 'Enter a number';
+})
+
+    
+}
