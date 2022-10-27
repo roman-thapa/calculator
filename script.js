@@ -9,6 +9,7 @@ let operator = document.querySelectorAll('.operator');
 
 
 power.addEventListener('click', ()=>{
+    console.log('clicked');
     getEntry(firstNumber);
     power.style.color = "green";
 })
@@ -91,19 +92,15 @@ function getEntry(number){
         number = '';
         entry.innerText = '0';
         result.innerText = 'Enter a number';
+        result.style.textAlign = "centre";
     });
 
     let clear = document.querySelector('.clear');
     clear.addEventListener('click', ()=>{
         let slicedNumber = number.slice(0, -1);
-        if(slicedNumber ===''){
-            number = '';
-            entry.innerText = '0';
-        }
-        else{
-            number = slicedNumber;
-            entry.innerText = number;
-        }
+        number = slicedNumber;
+        displayEntry(number);
+        
     });
 
 
@@ -134,6 +131,18 @@ function getEntry(number){
         operation = '+';
         blockOperator();
     });
+
+    let equalsTo = document.querySelector('#equalsTo');
+    equalsTo.addEventListener('click', ()=>{
+        if(operation === ''){
+            result.innerText = number;
+        }
+        else{
+            secondNumber = number;
+            checkOperator();
+            unblockOperator();
+        }
+    })
         
 
 }
@@ -142,8 +151,14 @@ function blockOperator() {
     for (i=0; i<operator.length; i++){
         operator[i].disabled = true;
     }
-    entry.innerText += operation;
+    entry.innerText = firstNumber + operation;
     getEntry(secondNumber);
+}
+
+function unblockOperator(){
+    for (i=0; i<operator.length; i++){
+        operator[i].disabled = false;
+    }
 }
 
 function displayEntry(number){
@@ -153,5 +168,31 @@ function displayEntry(number){
     else{
         result.style.textAlign = "end";
         result.innerText = number;
+    }
+}
+
+function checkOperator(){
+    let calculation;
+    firstNumber = +firstNumber;
+    secondNumber = +secondNumber;
+    entry.innerText = firstNumber + operation + secondNumber;
+    if(operation === '+'){
+        calculation = firstNumber + secondNumber;
+        result.innerText = calculation;
+    }
+
+    else if(operation === '-'){
+        calculation = firstNumber - secondNumber;
+        result.innerText = calculation;
+    }
+
+    else if(operation === '÷'){
+        calculation = firstNumber / secondNumber;
+        result.innerText = calculation;
+    }
+
+    else{
+        calculation = firstNumber * secondNumber;
+        result.innerText = calculation;
     }
 }
