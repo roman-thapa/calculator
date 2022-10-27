@@ -88,6 +88,19 @@ allClear.addEventListener('click', ()=>{
     number = '';
     entry.innerText = '0';
     result.innerText = 'Enter a number';
+});
+
+let clear = document.querySelector('.clear');
+clear.addEventListener('click', ()=>{
+    let slicedNumber = number.slice(0, -1);
+    if(slicedNumber ===''){
+        number = '';
+        entry.innerText = '0';
+    }
+    else{
+        number = slicedNumber;
+        entry.innerText = number;
+    }
 })
 
     
