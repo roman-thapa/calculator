@@ -1,6 +1,7 @@
 let firstNumber = '';
 let secondNumber = '';
 let operation = '';
+let doneCalculation = false;
 
 let entry = document.querySelector('.secondDisplay');
 let result = document.querySelector('.mainDisplay');
@@ -10,13 +11,29 @@ let operator = document.querySelectorAll('.operator');
 
 power.addEventListener('click', ()=>{
     console.log('clicked');
-    getEntry(firstNumber);
     power.style.color = "green";
+    startCalculator(firstNumber);
 })
+
+
+function startCalculator(number){
+    if(doneCalculation){
+        operation = '';
+        secondNumber = '';
+        entry.innerText = number;
+        getEntry(number);
+    }
+    else{
+        operation = '';
+        getEntry(number);
+    }
+}
 
 
 
 function getEntry(number){
+
+    doneCalculation = false;
 
     let one = document.querySelector('.num1');
     one.addEventListener('click', () => {
@@ -93,6 +110,8 @@ function getEntry(number){
         entry.innerText = '0';
         result.innerText = 'Enter a number';
         result.style.textAlign = "centre";
+        unblockOperator();
+        getEntry(firstNumber);
     });
 
     let clear = document.querySelector('.clear');
@@ -139,8 +158,11 @@ function getEntry(number){
         }
         else{
             secondNumber = number;
-            checkOperator();
+            let calculation = checkOperator();
+            result.innerText = calculation;
             unblockOperator();
+            console.log('clicked');
+            //startCalculator(calculation);
         }
     })
         
@@ -163,36 +185,51 @@ function unblockOperator(){
 
 function displayEntry(number){
     if(operation === ''){
-        entry.innerText = number;
+        if(number === ''){
+            entry.innerText = 0;
+        }
+        else{
+            entry.innerText = number;
+        }
     }
     else{
-        result.style.textAlign = "end";
-        result.innerText = number;
+        if(number === ''){
+            result.style.textAlign = "end";
+            result.innerText = 0;
+        }
+        else{
+            result.style.textAlign = "end";
+            result.innerText = number;
+        }
     }
 }
 
 function checkOperator(){
     let calculation;
+    let buttons = document.querySelectorAll('.button');
+
     firstNumber = +firstNumber;
     secondNumber = +secondNumber;
     entry.innerText = firstNumber + operation + secondNumber;
     if(operation === '+'){
         calculation = firstNumber + secondNumber;
-        result.innerText = calculation;
     }
 
     else if(operation === '-'){
         calculation = firstNumber - secondNumber;
-        result.innerText = calculation;
     }
 
     else if(operation === '÷'){
         calculation = firstNumber / secondNumber;
-        result.innerText = calculation;
     }
 
     else{
         calculation = firstNumber * secondNumber;
-        result.innerText = calculation;
     }
+
+    for ( let i=0 ; i < buttons.length; i++){
+        buttons[i].addEventListener('click', () => doneCalculation = true);
+    }
+
+    return calculation;
 }
