@@ -1,9 +1,8 @@
 let firstNumber = '';
 let secondNumber = '';
 let operation = '';
-let doneCalculation = false;
 
-let entry = document.querySelector('.secondDisplay');
+
 let result = document.querySelector('.mainDisplay');
 let power = document.querySelector('.powerButton');
 let operator = document.querySelectorAll('.operator');
@@ -12,22 +11,9 @@ let operator = document.querySelectorAll('.operator');
 power.addEventListener('click', ()=>{
     console.log('clicked');
     power.style.color = "green";
-    startCalculator(firstNumber);
+    getEntry(firstNumber);
 })
 
-
-function startCalculator(number){
-    if(doneCalculation){
-        operation = '';
-        secondNumber = '';
-        entry.innerText = number;
-        getEntry(number);
-    }
-    else{
-        operation = '';
-        getEntry(number);
-    }
-}
 
 
 
@@ -107,7 +93,6 @@ function getEntry(number){
         secondNumber = '';
         operation = '';
         number = '';
-        entry.innerText = '0';
         result.innerText = 'Enter a number';
         result.style.textAlign = "centre";
         unblockOperator();
@@ -160,9 +145,9 @@ function getEntry(number){
             secondNumber = number;
             let calculation = checkOperator();
             result.innerText = calculation;
+            secondNumber ='';
             unblockOperator();
-            console.log('clicked');
-            //startCalculator(calculation);
+            getEntry(calculation);
         }
     })
         
@@ -173,7 +158,7 @@ function blockOperator() {
     for (i=0; i<operator.length; i++){
         operator[i].disabled = true;
     }
-    entry.innerText = firstNumber + operation;
+    result.innerText = firstNumber + operation;
     getEntry(secondNumber);
 }
 
@@ -184,33 +169,25 @@ function unblockOperator(){
 }
 
 function displayEntry(number){
-    if(operation === ''){
-        if(number === ''){
-            entry.innerText = 0;
-        }
-        else{
-            entry.innerText = number;
-        }
+    if(number === '' && operation === ''){
+        result.style.textAlign = "end";
+        result.innerText = 0;
+    }
+    else if (firstNumber !== '' && operation !== '') {
+        result.style.textAlign = "end";
+        result.innerText = firstNumber + operation + number;
     }
     else{
-        if(number === ''){
-            result.style.textAlign = "end";
-            result.innerText = 0;
-        }
-        else{
-            result.style.textAlign = "end";
-            result.innerText = number;
-        }
+        result.style.textAlign = "end";
+        result.innerText = number;
     }
 }
 
 function checkOperator(){
     let calculation;
-    let buttons = document.querySelectorAll('.button');
-
+    
     firstNumber = +firstNumber;
     secondNumber = +secondNumber;
-    entry.innerText = firstNumber + operation + secondNumber;
     if(operation === '+'){
         calculation = firstNumber + secondNumber;
     }
@@ -225,10 +202,6 @@ function checkOperator(){
 
     else{
         calculation = firstNumber * secondNumber;
-    }
-
-    for ( let i=0 ; i < buttons.length; i++){
-        buttons[i].addEventListener('click', () => doneCalculation = true);
     }
 
     return calculation;
